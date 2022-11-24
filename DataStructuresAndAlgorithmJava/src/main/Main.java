@@ -1,4 +1,4 @@
-package mainPackage;
+package main;
 
 //static imports
 import static simpleSortingAlgorithms.SelectionSort.selectionSortAscending;
