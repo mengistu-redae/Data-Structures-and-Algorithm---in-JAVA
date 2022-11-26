@@ -223,6 +223,70 @@ public class Graph {
 		return true;
 	}
 	
+	//largest component problem
+	public static int largestComponent(Graph graph) {
+		
+		int size = 0;
+		Set<Vertex> visitedVertices = new HashSet<>();
+		
+		for(Vertex v : graph.getAdjacentVertices().keySet()) {
+			int count = countSize(graph, v, visitedVertices);
+			if(count > size) size = count;
+		}
+		
+		return size;
+	}
+	
+	//counts component size - helper function for "largest component problem" --- 
+	private static int countSize(Graph graph, Vertex src, Set<Vertex> visitedVertices) {
+		if(visitedVertices.contains(src)) return 0;
+		
+		int count = 1; //current vertex should be counted
+		visitedVertices.add(src);
+		
+		for(Vertex v : graph.getAdjacentVertices(src.getStudent())) {
+			count = count + countSize(graph, v, visitedVertices);
+		}
+		
+		return count;
+	}
+	
+	//shortest path problem
+	public static int shortestPathBreadthFirstIteratively(Graph graph, Vertex src, Vertex dst) {
+		//inner-class - to represent vertex and its corresponding weight
+		class WeightedVertex{
+			Vertex vertex;
+			int distance;	
+			
+			WeightedVertex(Vertex vertex, int distance){
+				this.vertex = vertex;
+				this.distance = distance;
+			}
+		}
+		
+		Set<Vertex> visitedVertices = new HashSet<>();
+		Queue<WeightedVertex> queue = new ArrayDeque<>();
+		queue.add(new WeightedVertex(src, 0));
+		
+		while(!queue.isEmpty()) {
+			WeightedVertex current = queue.poll();
+			
+			if(current.vertex.equals(dst)) return current.distance;
+			
+			visitedVertices.add(current.vertex);		
+			
+			//System.out.println(current.vertex.getStudent());
+			for(Vertex v : graph.getAdjacentVertices(current.vertex.getStudent())) {
+				if(!visitedVertices.contains(v))
+					queue.add(new WeightedVertex(v, current.distance + 1));
+			}
+		}
+		
+		
+		
+		return -1;
+	}
+	
 	
 	
 	

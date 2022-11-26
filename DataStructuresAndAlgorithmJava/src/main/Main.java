@@ -139,6 +139,43 @@ public class Main {
 		printMessage("connected components of - grpah2");
 		System.out.println(Graph.connectedComponentsCount(graph2));
 		
+		printDecoratedMessage("Largest component problem");
+		printMessage("largest component in - grpah1");
+		System.out.println(Graph.largestComponent(graph1));
+		
+		printMessage("largest component in - grpah2");
+		System.out.println(Graph.largestComponent(graph2));
+		
+		printDecoratedMessage("Shortest path problem");
+		printMessage("shortest path -- graph-1 from Vertex 1 to 5");
+		System.out.println(
+				Graph.shortestPathBreadthFirstIteratively(
+						graph1, 
+						new Vertex(studentList1.get(0)),
+						new Vertex(studentList1.get(4))		
+					));
+
+		printMessage("shortest path -- graph-1 from Vertex 5 to 10");
+		System.out.println(
+				Graph.shortestPathBreadthFirstIteratively(
+						graph1, 
+						new Vertex(studentList1.get(4)),
+						new Vertex(studentList1.get(9))		
+					));
+		printMessage("shortest path -- graph-2 from Vertex 1 to 2");
+		System.out.println(
+				Graph.shortestPathBreadthFirstIteratively(
+						graph2, 
+						new Vertex(studentList2.get(0)),
+						new Vertex(studentList2.get(1))		
+					));
+		printMessage("shortest path -- graph-2 from Vertex 1 to itself");
+		System.out.println(
+				Graph.shortestPathBreadthFirstIteratively(
+						graph2, 
+						new Vertex(studentList2.get(0)),
+						new Vertex(studentList2.get(0))		
+					));
 	}
 
 	// print contents of an array
