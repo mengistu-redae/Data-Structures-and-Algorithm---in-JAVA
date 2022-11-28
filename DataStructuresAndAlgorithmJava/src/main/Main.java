@@ -176,6 +176,12 @@ public class Main {
 						new Vertex(studentList2.get(0)),
 						new Vertex(studentList2.get(0))		
 					));
+		
+		printDecoratedMessage("Adjacency matrix -- graph-1");
+		int[][] adjacencyMatrix = Graph.createAdjacecnyMatrix();
+		Graph.printAdjacencyMatrix(adjacencyMatrix);
+		System.out.println("Number of islands in the graph: " + Graph.islandCount(adjacencyMatrix));
+		
 	}
 
 	// print contents of an array

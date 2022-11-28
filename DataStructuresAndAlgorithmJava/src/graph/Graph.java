@@ -58,6 +58,15 @@ public class Graph {
 		return true;
 	}
 	
+	//adding Edge in adjacency-matrix (undirected graph)
+	public static int[][] addUndirectedEdge(int[][] adjacencyMatrix, int v1, int v2){
+		//undirected graph edge in adjacency matrix
+		adjacencyMatrix[v1][v2] = 1;
+		adjacencyMatrix[v2][v1] = 1;
+		
+		return adjacencyMatrix;
+	}
+	
 	//removing Edge (undirected graph)
 	public boolean removeUndirectedEdge(Student studnet1, Student student2) {
 		Vertex vertex1 = new Vertex(studnet1);
@@ -237,7 +246,7 @@ public class Graph {
 		return size;
 	}
 	
-	//counts component size - helper function for "largest component problem" --- 
+	//counts component size - helper function for "largest component problem"
 	private static int countSize(Graph graph, Vertex src, Set<Vertex> visitedVertices) {
 		if(visitedVertices.contains(src)) return 0;
 		
@@ -280,14 +289,63 @@ public class Graph {
 				if(!visitedVertices.contains(v))
 					queue.add(new WeightedVertex(v, current.distance + 1));
 			}
-		}
-		
-		
+		}		
 		
 		return -1;
 	}
 	
+	//island count problem --- the input is adjacency matrix (not adjacency list)
+	public static int islandCount(int[][] adjacencyMatrix) {
+		
+		//int[][] adjacencyMatrix = new int[0][0];
+		
+		//if adjacencyMatrix is not null
+		if(adjacencyMatrix == null) return 0;
+		
+		
+		//visited vertices
+		Set<String> visitedVertices = new HashSet<>();
+		int count = 0;
+		
+		for(int row=0; row < adjacencyMatrix.length ; row++)
+			for(int col=0; col<adjacencyMatrix[row].length; col++) {
+				if(exploreIsland(adjacencyMatrix, row, col, visitedVertices)) {
+					count++;
+				}
+			}
+		
+		return count;
+	}
 	
+	//explore --- helper function for "island count problem"
+	//returns true if it go exploration otherwise false(i.e. if already explored before)
+	private static boolean exploreIsland(int[][] adjacencyMatrix, int row, int col, Set<String> visitedVertices) {
+		
+		//check if row and col indices are valid(not to go out of array index bound)
+		boolean  rowInbound = ((row >= 0) && (row < adjacencyMatrix.length))? true: false;
+		boolean  colInbound = ((col >= 0) && (col < adjacencyMatrix[0].length))? true: false;
+		//if index(row or col) out of bound, return false
+		if(!rowInbound || !colInbound) return false;
+		
+		//if the position doesn't represent an edge(no connection between the vertices), return false
+		if(adjacencyMatrix[row][col] == 0) return false;
+		
+		//row and col converted into comma separated string to represent a position
+		String position = row + "," + col; 		
+		//if the position is already explored, return false
+		if(visitedVertices.contains(position)) return false; 
+		
+		
+		//otherwise go for exploration, Depth-first traversal using recursion
+		visitedVertices.add(position);
+		
+		exploreIsland(adjacencyMatrix, row - 1, col, visitedVertices); //upward from current position
+		exploreIsland(adjacencyMatrix, row + 1, col, visitedVertices); //downward from current position
+		exploreIsland(adjacencyMatrix, row, col - 1, visitedVertices); //left from current position
+		exploreIsland(adjacencyMatrix, row, col + 1, visitedVertices); //right from current position
+		
+		return true;
+	}
 	
 	
 	//creating graph manually
@@ -336,6 +394,48 @@ public class Graph {
 		
 		return graph;
 	}
+	
+	//create adjacency matrix representation of a graph
+	public static int[][] createAdjacecnyMatrix(){
+		//number of vertices
+		int n = Graph.getStudnetsList1().size();
+		
+		//to store edges between vertices
+		int[][] adjacecnyMatrix = new int[n][n];
+		
+		//initialize adjacency matrix: all elements to 0
+		for(int i=0; i<n; i++)
+			for(int j=0; j<n; j++)
+				adjacecnyMatrix[i][j] = 0;
+		
+		//establishing the edges
+		Graph.addUndirectedEdge(adjacecnyMatrix,0,1);
+		Graph.addUndirectedEdge(adjacecnyMatrix,0,2);
+		Graph.addUndirectedEdge(adjacecnyMatrix,1,3);
+		Graph.addUndirectedEdge(adjacecnyMatrix,2,3); 
+		//Graph.addUndirectedEdge(adjacecnyMatrix,2,4); // To create disconnected islands 
+		Graph.addUndirectedEdge(adjacecnyMatrix,4,5);
+		Graph.addUndirectedEdge(adjacecnyMatrix,4,6);
+		Graph.addUndirectedEdge(adjacecnyMatrix,5,6);
+		Graph.addUndirectedEdge(adjacecnyMatrix,5,7);
+		//Graph.addUndirectedEdge(adjacecnyMatrix,7,8); // To create a disconnected vertex
+		Graph.addUndirectedEdge(adjacecnyMatrix,7,9);
+				
+		return adjacecnyMatrix;
+	}
+	
+	//display graph in adjacency matrix format
+	public static void printAdjacencyMatrix(int[][] adjacecnyMatrix) {
+		//display the graph (adjacency matrix)
+		for(int row=0; row < adjacecnyMatrix.length ; row++) {
+			for(int col=0; col < adjacecnyMatrix[row].length; col++)
+				System.out.print(adjacecnyMatrix[row][col] + " ");
+			
+			System.out.println();
+		}
+	}
+	
+	
 	
 	//students list-1
 	public static ArrayList<Student> getStudnetsList1(){
