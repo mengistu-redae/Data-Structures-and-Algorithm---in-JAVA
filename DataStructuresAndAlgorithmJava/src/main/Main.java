@@ -180,8 +180,13 @@ public class Main {
 		printDecoratedMessage("Adjacency matrix -- graph-1");
 		int[][] adjacencyMatrix = Graph.createAdjacecnyMatrix();
 		Graph.printAdjacencyMatrix(adjacencyMatrix);
-		System.out.println("Number of islands in the graph: " + Graph.islandCount(adjacencyMatrix));
 		
+		printDecoratedMessage("Island Problems --- on adjacencyMatrix graph");
+		printMessage("Number of islands in the graph:");
+		System.out.println(Graph.islandCount(adjacencyMatrix));
+		
+		printMessage("Minimum sized island:");
+		System.out.println(Graph.minimumIsland(adjacencyMatrix));
 	}
 
 	// print contents of an array

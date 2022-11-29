@@ -239,7 +239,7 @@ public class Graph {
 		Set<Vertex> visitedVertices = new HashSet<>();
 		
 		for(Vertex v : graph.getAdjacentVertices().keySet()) {
-			int count = countSize(graph, v, visitedVertices);
+			int count = countComponentSize(graph, v, visitedVertices);
 			if(count > size) size = count;
 		}
 		
@@ -247,14 +247,14 @@ public class Graph {
 	}
 	
 	//counts component size - helper function for "largest component problem"
-	private static int countSize(Graph graph, Vertex src, Set<Vertex> visitedVertices) {
+	private static int countComponentSize(Graph graph, Vertex src, Set<Vertex> visitedVertices) {
 		if(visitedVertices.contains(src)) return 0;
 		
 		int count = 1; //current vertex should be counted
 		visitedVertices.add(src);
 		
 		for(Vertex v : graph.getAdjacentVertices(src.getStudent())) {
-			count = count + countSize(graph, v, visitedVertices);
+			count = count + countComponentSize(graph, v, visitedVertices);
 		}
 		
 		return count;
@@ -347,6 +347,57 @@ public class Graph {
 		return true;
 	}
 	
+	//Minimum island problem
+	public static int minimumIsland(int[][] adjacencyMatrix) {
+				
+		//if adjacencyMatrix is null, return 0
+		if(adjacencyMatrix == null) return 0;
+		
+		Set<String> visitedVertices = new HashSet<>();
+		int minimumIslandSize = Integer.MAX_VALUE; //initialize our minimum size to be maximum number
+		
+		for(int row=0; row < adjacencyMatrix.length ; row++)
+			for(int col=0; col < adjacencyMatrix[0].length; col++) {
+				
+				int size = countIslandSize(adjacencyMatrix, row, col, visitedVertices);
+				
+				if((size > 0 ) && (size < minimumIslandSize))
+					minimumIslandSize = size;
+			}
+		
+		
+		return minimumIslandSize;
+	}
+	
+	//counts island size - helper function for "minimum island problem"
+	private static int countIslandSize(int[][] adjacencyMatrix, int row, int col, Set<String> visistedVertices) {
+		
+		//check row and col index validity --- return 0 if not valid
+		boolean rowInbound = ((row >= 0) && (row < adjacencyMatrix.length))? true: false;
+		boolean colInbound = ((col >= 0) && (col < adjacencyMatrix.length))? true: false;
+		if(!rowInbound || !colInbound) return 0; 
+		
+		//if the position doesn't represent 
+		//an edge(no connection between the vertices), return false
+		if(adjacencyMatrix[row][col] == 0) return 0;
+		
+		//if the position is visited, return 0
+		String position = row + "," + col;
+		if(visistedVertices.contains(position)) return 0;
+		
+		
+		//otherwise go visiting and counting
+		int count = 1; //current position
+		visistedVertices.add(position);
+		
+		count += countIslandSize(adjacencyMatrix, row - 1, col, visistedVertices); //up
+		count += countIslandSize(adjacencyMatrix, row + 1, col, visistedVertices); //down
+		count += countIslandSize(adjacencyMatrix, row, col - 1, visistedVertices); //left
+		count += countIslandSize(adjacencyMatrix, row, col + 1, visistedVertices); //right
+		
+		
+		return count;		
+	}
 	
 	//creating graph manually
 	public static Graph createGraph1() {
