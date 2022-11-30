@@ -5,6 +5,8 @@ import static simpleSortingAlgorithms.SelectionSort.selectionSortAscending;
 import static simpleSortingAlgorithms.SelectionSort.selectionSortDescending;
 import static simpleSortingAlgorithms.InsertionSort.insertionSortAscending;
 import static simpleSortingAlgorithms.InsertionSort.insertionSortDescending;
+import static simpleSortingAlgorithms.BubbleOrExchangeSort.bubleOrExchangeSortAscending;
+import static simpleSortingAlgorithms.BubbleOrExchangeSort.bubleOrExchangeSortDescending;
 
 
 import java.util.ArrayList;
@@ -25,13 +27,13 @@ public class Main {
 		arraySortingAlgorithms();
 		
 		//Linked list data structure and algorithms
-		linkeListAlgorithms();
+		//linkeListAlgorithms();
 		
 		//Binary Tree data structure and algorithms
-		binaryTreeAlgorithms();		
+		//binaryTreeAlgorithms();		
 		
 		//Graph data structure and algorithms
-		graphAlgorithms();	
+		//graphAlgorithms();	
 	}
 
 	// print separator
@@ -69,12 +71,18 @@ public class Main {
 		printSeparator("Sorted - Asc and Des");
 		printArrayElements(selectionSortAscending(array1));
 		printArrayElements(selectionSortDescending(array1));
+		
 		printDecoratedMessage("--- Insertion Sort ---");
 		printArrayElements(array2);
 		printSeparator("Sorted - Asc and Des");
 		printArrayElements(insertionSortAscending(array2));
 		printArrayElements(insertionSortDescending(array2));
 		
+		printDecoratedMessage("--- Bubble(exchange) Sort ---");
+		printArrayElements(array3);
+		printSeparator("Sorted - Asc and Des");
+		printArrayElements(bubleOrExchangeSortAscending(array3));
+		printArrayElements(bubleOrExchangeSortDescending(array3));
 	}
 	
 	private static void graphAlgorithms() {		

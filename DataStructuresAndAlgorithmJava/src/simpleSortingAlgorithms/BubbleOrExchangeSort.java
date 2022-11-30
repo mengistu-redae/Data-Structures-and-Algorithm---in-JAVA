@@ -17,13 +17,31 @@ public class BubbleOrExchangeSort {
 	 * 
 	 */
 	
-	public static int[] BubleOrExchangeSortAscending(int[] a) {
+	public static int[] bubleOrExchangeSortAscending(int[] a) {
+		for(int i = a.length-1 ; i>0 ; i--) {
+			for(int j=0; j<i; j++) {
+				if(a[j] > a[j+1]) {
+					int temp = a[j];
+					a[j]=a[j+1];
+					a[j+1]=temp;
+				}
+			}
+			
+		}
 		
 		return a;
 	}
 
-	public static int[] BubleOrExchangeSortDescending(int[] a) {
-		
+	public static int[] bubleOrExchangeSortDescending(int[] a) {
+		for(int i = a.length-1; i>0; i--) {
+			for(int j = 0; j<i; j++) {
+				if(a[j]<a[j+1]) {
+					int temp = a[j];
+					a[j] = a[j+1];
+					a[j+1] = temp;
+				}
+			}
+		}
 		return a;
 	}
 }
