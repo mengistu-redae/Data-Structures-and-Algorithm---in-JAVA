@@ -7,6 +7,8 @@ import static simpleSortingAlgorithms.InsertionSort.insertionSortAscending;
 import static simpleSortingAlgorithms.InsertionSort.insertionSortDescending;
 import static simpleSortingAlgorithms.BubbleOrExchangeSort.bubleOrExchangeSortAscending;
 import static simpleSortingAlgorithms.BubbleOrExchangeSort.bubleOrExchangeSortDescending;
+import static simpleSearchingAlgorithms.LinearOrSequentialSearch.linearOrSequentialSearching;
+import static simpleSearchingAlgorithms.BinarySearch.binarySearch;
 
 
 import java.util.ArrayList;
@@ -66,6 +68,8 @@ public class Main {
 		int[] array2 = { 5, -2, 23, 7, 87, -42, 509 };
 		int[] array3 = { 45, 12, 85, 32, 89, 39, 69, 44, 42, 1, 6, 8 };
 	
+		//Simple Sorting Algorithms
+		printDecoratedMessage("Simple Sorting Algorithms");
 		printDecoratedMessage("--- Selection Sort ---");
 		printArrayElements(array1);
 		printSeparator("Sorted - Asc and Des");
@@ -83,6 +87,22 @@ public class Main {
 		printSeparator("Sorted - Asc and Des");
 		printArrayElements(bubleOrExchangeSortAscending(array3));
 		printArrayElements(bubleOrExchangeSortDescending(array3));
+		
+		printDecoratedMessage("--- Bubble(exchange) Sort ---");
+		printArrayElements(array3);
+		printSeparator("Sorted - Asc and Des");
+		printArrayElements(bubleOrExchangeSortAscending(array3));
+		printArrayElements(bubleOrExchangeSortDescending(array3));
+		
+		//Simple Sorting Algorithms
+		printDecoratedMessage("Simple Searching Algorithms");
+		printDecoratedMessage("--- Linear(Sequential) Search ---");
+		printArrayElements(array1);
+		int index1 = linearOrSequentialSearching(array1, 34);
+		int index2 = binarySearch(insertionSortDescending(array1), 34);
+		printMessage("linear search --- '34' is found at index: " + index1);
+		printMessage("binary search --- '12' after sorting is found at index: " + index2);
+		
 	}
 	
 	private static void graphAlgorithms() {		
@@ -287,7 +307,8 @@ public class Main {
 		
 	}
 
-	private static void binaryTreeAlgorithms() {
+	
+private static void binaryTreeAlgorithms() {
 		printDecoratedMessage("--- BinarySearch Tree - Depth-First Search(Traversal)  ---");
 		binaryTree.Node treeHead1 = BinarySearchTree.createBinarySearchTree1();
 		binaryTree.Node treeHead2 = BinarySearchTree.createBinarySearchTree2();
