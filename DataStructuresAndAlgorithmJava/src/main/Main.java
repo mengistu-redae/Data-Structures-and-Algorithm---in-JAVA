@@ -3,6 +3,9 @@ package main;
 //static imports
 import static simpleSortingAlgorithms.SelectionSort.selectionSortAscending;
 import static simpleSortingAlgorithms.SelectionSort.selectionSortDescending;
+import static simpleSortingAlgorithms.InsertionSort.insertionSortAscending;
+import static simpleSortingAlgorithms.InsertionSort.insertionSortDescending;
+
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -31,6 +34,49 @@ public class Main {
 		graphAlgorithms();	
 	}
 
+	// print separator
+	private static void printDecoratedMessage(String message) {
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");
+		printMessage(message);
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");
+	}
+	
+	// print separator
+	private static void printSeparator(String message) {
+		System.out.println("---- " + message + " ----");
+	}
+
+	// print separator
+	private static void printMessage(String message) {
+		System.out.println(message);
+	}
+
+	// print contents of an array
+	private static void printArrayElements(int[] array) {
+		for (int a : array)
+			System.out.print(a + ", ");
+
+		System.out.println();
+	}
+	
+	private static void arraySortingAlgorithms() {
+		int[] array1 = new int[] { 90, 23, 5, 109, 12, 22, 67, 34 };
+		int[] array2 = { 5, -2, 23, 7, 87, -42, 509 };
+		int[] array3 = { 45, 12, 85, 32, 89, 39, 69, 44, 42, 1, 6, 8 };
+	
+		printDecoratedMessage("--- Selection Sort ---");
+		printArrayElements(array1);
+		printSeparator("Sorted - Asc and Des");
+		printArrayElements(selectionSortAscending(array1));
+		printArrayElements(selectionSortDescending(array1));
+		printDecoratedMessage("--- Insertion Sort ---");
+		printArrayElements(array2);
+		printSeparator("Sorted - Asc and Des");
+		printArrayElements(insertionSortAscending(array2));
+		printArrayElements(insertionSortDescending(array2));
+		
+	}
+	
 	private static void graphAlgorithms() {		
 		
 		//create student list
@@ -187,43 +233,6 @@ public class Main {
 		
 		printMessage("Minimum sized island:");
 		System.out.println(Graph.minimumIsland(adjacencyMatrix));
-	}
-
-	// print contents of an array
-	private static void printArrayElements(int[] array) {
-		for (int a : array)
-			System.out.print(a + ", ");
-
-		System.out.println();
-	}
-
-	// print separator
-	private static void printSeparator(String message) {
-		System.out.println("---- " + message + " ----");
-	}
-
-	// print separator
-	private static void printMessage(String message) {
-		System.out.println(message);
-	}
-
-	// print separator
-	private static void printDecoratedMessage(String message) {
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");
-		printMessage(message);
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");
-	}
-
-	private static void arraySortingAlgorithms() {
-		int[] array1 = new int[] { 90, 23, 5, 109, 12, 22, 67, 34 };
-		//int[] array2 = { 5, -2, 23, 7, 87, -42, 509 };
-		//int[] array3 = { 45, 12, 85, 32, 89, 39, 69, 44, 42, 1, 6, 8 };
-	
-		printDecoratedMessage("--- Selection Sort ---");
-		printArrayElements(array1);
-		printSeparator("Sorted - Asc and Des");
-		printArrayElements(selectionSortAscending(array1));
-		printArrayElements(selectionSortDescending(array1));
 	}
 
 	private static void linkeListAlgorithms() {
