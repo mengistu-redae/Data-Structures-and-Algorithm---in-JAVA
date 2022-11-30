@@ -27,13 +27,13 @@ public class Main {
 		arraySortingAlgorithms();
 		
 		//Linked list data structure and algorithms
-		//linkeListAlgorithms();
+		linkeListAlgorithms();
 		
 		//Binary Tree data structure and algorithms
-		//binaryTreeAlgorithms();		
+		binaryTreeAlgorithms();		
 		
 		//Graph data structure and algorithms
-		//graphAlgorithms();	
+		graphAlgorithms();	
 	}
 
 	// print separator
